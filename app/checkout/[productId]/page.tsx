@@ -382,7 +382,7 @@ export default function CheckoutPage() {
                       setForm((p) => ({ ...p, customerName: e.target.value }));
                       setFormErrors((p) => ({ ...p, customerName: "" }));
                     }}
-                    placeholder="John Doe"
+                    placeholder="Kavya"
                   />
                   {formErrors.customerName && <p className="error-text">{formErrors.customerName}</p>}
                 </div>
@@ -398,7 +398,7 @@ export default function CheckoutPage() {
                       setForm((p) => ({ ...p, customerId: e.target.value }));
                       setFormErrors((p) => ({ ...p, customerId: "" }));
                     }}
-                    placeholder="john@example.com"
+                    placeholder="kavya@gmail.com"
                   />
                   {formErrors.customerId && <p className="error-text">{formErrors.customerId}</p>}
                 </div>

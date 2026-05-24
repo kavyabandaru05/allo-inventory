@@ -128,18 +128,8 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser! You wil
 
 Deploying to Vercel is extremely easy!
 
-### Step 1: Push to GitHub
-Create a GitHub repository and push your local codebase to it.
-```bash
-git init
-git add .
-git commit -m "initial commit"
-git remote add origin YOUR_GITHUB_REPO_URL
-git push -u origin main
-```
-
-### Step 2: Import into Vercel
-1. Go to **[vercel.com/new](https://vercel.com/new)** and import your repository.
+### Step 1: Import into Vercel
+1. Go to **[vercel.com/new](https://vercel.com/new)** and import your Git repository.
 2. Under **Environment Variables**, add the exact same keys from your `.env` file:
    - `DATABASE_URL`
    - `DIRECT_URL`
@@ -148,7 +138,7 @@ git push -u origin main
    - `CRON_SECRET`
 3. Click **Deploy**. Vercel will build the Next.js routes, compile static pages, and establish Serverless functions instantly.
 
-### Step 3: Verify the Expiry Cron Job
+### Step 2: Verify the Expiry Cron Job
 Vercel reads the `vercel.json` file in our root and automatically registers a background cron job to release expired checkouts.
 To confirm:
 1. Go to your Vercel Project Dashboard.

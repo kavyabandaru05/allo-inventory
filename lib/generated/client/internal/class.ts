@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.8.0",
   "engineVersion": "3c6e192761c0362d496ed980de936e2f3cebcd3a",
   "activeProvider": "postgresql",
-  "inlineSchema": "datasource db {\n  provider = \"postgresql\"\n}\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../lib/generated/client\"\n}\n\nmodel Product {\n  id            String        @id @default(cuid())\n  name          String\n  sku           String        @unique\n  description   String\n  totalStock    Int           @default(0)\n  reservedStock Int           @default(0)\n  priceInPaise  Int           @default(0)\n  imageUrl      String        @default(\"\")\n  warehouse     String        @default(\"Hyderabad-WH1\")\n  createdAt     DateTime      @default(now())\n  updatedAt     DateTime      @updatedAt\n  reservations  Reservation[]\n}\n\nmodel Reservation {\n  id           String            @id @default(cuid())\n  productId    String\n  product      Product           @relation(fields: [productId], references: [id])\n  customerId   String\n  customerName String\n  quantity     Int\n  status       ReservationStatus @default(PENDING)\n  expiresAt    DateTime\n  confirmedAt  DateTime?\n  releasedAt   DateTime?\n  createdAt    DateTime          @default(now())\n  updatedAt    DateTime          @updatedAt\n}\n\nenum ReservationStatus {\n  PENDING\n  CONFIRMED\n  RELEASED\n  EXPIRED\n}\n",
+  "inlineSchema": "datasource db {\n  provider = \"postgresql\"\n}\n\ngenerator client {\n  provider     = \"prisma-client\"\n  output       = \"../lib/generated/client\"\n  moduleFormat = \"cjs\"\n}\n\nmodel Product {\n  id            String        @id @default(cuid())\n  name          String\n  sku           String        @unique\n  description   String\n  totalStock    Int           @default(0)\n  reservedStock Int           @default(0)\n  priceInPaise  Int           @default(0)\n  imageUrl      String        @default(\"\")\n  warehouse     String        @default(\"Hyderabad-WH1\")\n  createdAt     DateTime      @default(now())\n  updatedAt     DateTime      @updatedAt\n  reservations  Reservation[]\n}\n\nmodel Reservation {\n  id           String            @id @default(cuid())\n  productId    String\n  product      Product           @relation(fields: [productId], references: [id])\n  customerId   String\n  customerName String\n  quantity     Int\n  status       ReservationStatus @default(PENDING)\n  expiresAt    DateTime\n  confirmedAt  DateTime?\n  releasedAt   DateTime?\n  createdAt    DateTime          @default(now())\n  updatedAt    DateTime          @updatedAt\n}\n\nenum ReservationStatus {\n  PENDING\n  CONFIRMED\n  RELEASED\n  EXPIRED\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -45,10 +45,10 @@ async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Modul
 }
 
 config.compilerWasm = {
-  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.mjs"),
+  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.js"),
 
   getQueryCompilerWasmModule: async () => {
-    const { wasm } = await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.wasm-base64.mjs")
+    const { wasm } = await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.wasm-base64.js")
     return await decodeBase64AsWasm(wasm)
   },
 

@@ -7,15 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "setup": "ts-node --compiler-options {\"module\":\"CommonJS\"} scripts/setup.ts",
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
+    "setup": "ts-node scripts/setup.ts",
+    "seed": "ts-node prisma/seed.ts",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
     "postinstall": "prisma generate"
   },
   "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",

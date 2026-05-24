@@ -2,12 +2,31 @@ import { PrismaClient } from "../lib/generated/client/client";
 import { Pool, neonConfig } from "@neondatabase/serverless";
 import { PrismaNeon } from "@prisma/adapter-neon";
 import ws from "ws";
+import * as fs from "fs";
+import * as path from "path";
+
+// Load environment variables from .env for standalone script execution
+const envPath = path.join(process.cwd(), ".env");
+if (fs.existsSync(envPath)) {
+  const content = fs.readFileSync(envPath, "utf-8");
+  content.split(/\r?\n/).forEach((line) => {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) return;
+    const match = trimmed.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+    if (match) {
+      const key = match[1];
+      let value = (match[2] || "").trim();
+      // Strip leading/trailing single or double quotes
+      value = value.replace(/^["']|["']$/g, "");
+      process.env[key] = value;
+    }
+  });
+}
 
 neonConfig.webSocketConstructor = ws;
 
 const connectionString = process.env.DATABASE_URL || "postgresql://localhost:5432";
-const pool = new Pool({ connectionString });
-const adapter = new PrismaNeon(pool as any);
+const adapter = new PrismaNeon({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 /* Seed the database with 8 realistic electronics/lifestyle products */

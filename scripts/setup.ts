@@ -4,8 +4,6 @@ import { execSync } from "child_process";
 import { Pool, neonConfig } from "@neondatabase/serverless";
 import ws from "ws";
 import { Redis } from "@upstash/redis";
-import { PrismaClient } from "../lib/generated/client/client";
-import { PrismaNeon } from "@prisma/adapter-neon";
 
 // Set up WebSocket support for Neon in Node.js environment
 neonConfig.webSocketConstructor = ws;
@@ -21,12 +19,9 @@ function loadEnv() {
       const match = trimmed.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
       if (match) {
         const key = match[1];
-        let value = match[2] || "";
-        if (value.startsWith('"') && value.endsWith('"')) {
-          value = value.substring(1, value.length - 1);
-        } else if (value.startsWith("'") && value.endsWith("'")) {
-          value = value.substring(1, value.length - 1);
-        }
+        let value = (match[2] || "").trim();
+        // Strip leading/trailing single or double quotes
+        value = value.replace(/^["']|["']$/g, "");
         process.env[key] = value;
       }
     });
@@ -130,7 +125,7 @@ async function main() {
 
   // 6. Push Schema to Neon DB
   console.log("\n🚀 Syncing database schema with Neon DB...");
-  if (!runCommand("npx prisma db push --skip-generate")) {
+  if (!runCommand("npx prisma db push")) {
     console.error("❌ Database push failed.");
     await pool.end();
     process.exit(1);
@@ -148,8 +143,7 @@ async function main() {
 
   // 8. Check Database Seed Status
   console.log("\n📊 Verifying seed data in database...");
-  const adapter = new PrismaNeon(pool as any);
-  const prisma = new PrismaClient({ adapter });
+  const { prisma } = await import("../lib/prisma");
 
   try {
     const productCount = await prisma.product.count();

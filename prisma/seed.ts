@@ -40,7 +40,7 @@ async function main() {
       totalStock: 45,
       priceInPaise: 13490000,
       warehouse: "Hyderabad-WH1",
-      imageUrl: "",
+      imageUrl: "/images/iphone_15_pro.png",
     },
     {
       name: "Sony WH-1000XM5",
@@ -50,7 +50,7 @@ async function main() {
       totalStock: 120,
       priceInPaise: 2699000,
       warehouse: "Mumbai-WH2",
-      imageUrl: "",
+      imageUrl: "/images/sony_headphones.png",
     },
     {
       name: "MacBook Air M3 8GB",
@@ -60,7 +60,7 @@ async function main() {
       totalStock: 22,
       priceInPaise: 11490000,
       warehouse: "Delhi-WH3",
-      imageUrl: "",
+      imageUrl: "/images/macbook_air.png",
     },
     {
       name: 'Samsung 65" QLED TV',
@@ -70,7 +70,7 @@ async function main() {
       totalStock: 8,
       priceInPaise: 8999000,
       warehouse: "Hyderabad-WH1",
-      imageUrl: "",
+      imageUrl: "/images/samsung_qled_tv.png",
     },
     {
       name: "iPad Pro 11\" M4",
@@ -80,7 +80,7 @@ async function main() {
       totalStock: 37,
       priceInPaise: 9990000,
       warehouse: "Mumbai-WH2",
-      imageUrl: "",
+      imageUrl: "/images/ipad_pro.png",
     },
     {
       name: "Dyson V15 Detect",
@@ -90,7 +90,7 @@ async function main() {
       totalStock: 55,
       priceInPaise: 5290000,
       warehouse: "Delhi-WH3",
-      imageUrl: "",
+      imageUrl: "/images/dyson_vacuum.png",
     },
     {
       name: "Apple Watch Ultra 2",
@@ -100,7 +100,7 @@ async function main() {
       totalStock: 18,
       priceInPaise: 8990000,
       warehouse: "Hyderabad-WH1",
-      imageUrl: "",
+      imageUrl: "/images/apple_watch_ultra.png",
     },
     {
       name: "Bose QuietComfort 45",
@@ -110,7 +110,7 @@ async function main() {
       totalStock: 2,
       priceInPaise: 2499000,
       warehouse: "Mumbai-WH2",
-      imageUrl: "",
+      imageUrl: "/images/bose_headphones.png",
     },
   ];
 

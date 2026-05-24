@@ -1,4 +1,4 @@
-import { ReservationStatus } from "@prisma/client";
+import { ReservationStatus } from "@/lib/prisma";
 
 interface StatusBadgeProps {
   status: ReservationStatus;

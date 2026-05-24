@@ -6,7 +6,7 @@ import ReservationTimer from "@/components/ReservationTimer";
 import EmptyState from "@/components/EmptyState";
 import { useToast } from "@/components/Toast";
 import { formatDate, generateReservationId } from "@/lib/utils";
-import { ReservationStatus } from "@prisma/client";
+import { ReservationStatus } from "@/lib/prisma";
 
 interface ReservationWithProduct {
   id: string;

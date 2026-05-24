@@ -46,21 +46,32 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div className="card card-interactive" style={{ display: "flex", flexDirection: "column" }}>
-      {/* Image placeholder */}
+      {/* Product Image */}
       <div
         style={{
           width: "100%",
           height: 180,
           borderRadius: 8,
-          background: product.imageUrl || getGradient(product.name),
+          background: !product.imageUrl ? getGradient(product.name) : "var(--bg-elevated)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           marginBottom: 16,
           overflow: "hidden",
+          position: "relative",
         }}
       >
-        {!product.imageUrl && (
+        {product.imageUrl ? (
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+        ) : (
           <span
             style={{
               fontSize: 48,

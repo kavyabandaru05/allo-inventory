@@ -294,14 +294,26 @@ export default function CheckoutPage() {
                 width: "100%",
                 height: 200,
                 borderRadius: 8,
-                background: product.imageUrl || getGradient(product.name),
+                background: !product.imageUrl ? getGradient(product.name) : "var(--bg-elevated)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 20,
+                overflow: "hidden",
+                position: "relative",
               }}
             >
-              {!product.imageUrl && (
+              {product.imageUrl ? (
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              ) : (
                 <span style={{ fontSize: 64, fontWeight: 700, color: "rgba(255,255,255,0.2)" }}>
                   {product.name.charAt(0)}
                 </span>

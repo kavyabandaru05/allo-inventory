@@ -108,7 +108,7 @@ export default function AdminPage() {
   const handleExpiryCheck = async () => {
     setExpiryLoading(true);
     try {
-      const res = await fetch("/api/cron/expire-reservations");
+      const res = await fetch("/api/admin/expire", { method: "POST" });
       if (!res.ok) throw new Error("Failed to run expiry check");
       const data = await res.json();
       if (data.expired > 0) {
